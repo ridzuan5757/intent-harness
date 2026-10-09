@@ -31,9 +31,9 @@
   `--pairs N` for the smoke run
 - [X] T011 [US2] `checks/compare_legs.py`: summary and per-image agreement with
   `07-full-counts.parquet`
-- [X] T012 [US2] M3: sync, smoke run on 5 pairs, full run under nohup, pull
-- [ ] T013 [US2] Record the result in spec.md
+- [X] T012 [US2] M3: sync, smoke run on 5 pairs, pull (the full run moves to feature 007)
+- [X] T013 [US2] Record the result in spec.md
 
 ## Phase 5: Polish
 
-- [ ] T014 Full test run; staged diff checked for the assistant's name; rebase; pull request
+- [X] T014 Full test run; staged diff checked for the assistant's name; rebase; pull request

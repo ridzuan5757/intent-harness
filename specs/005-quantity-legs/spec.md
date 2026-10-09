@@ -50,16 +50,16 @@ A reviewer runs the check script on the M3 and compares its counts with the expe
 **Why this priority**: The paper reports these numbers. Moving the code into the SDK must not
 change what it counts.
 
-**Independent Test**: Run `specs/005-quantity-legs/checks/reproduce_legs.py` on the 2,196 images
-of `train-animals.parquet`, then `compare_legs.py` on its output.
+**Independent Test**: Run `specs/005-quantity-legs/checks/reproduce_legs.py --pairs 5` on the
+M3, then `compare_legs.py` on its output.
 
 **Acceptance Scenarios**:
 
-1. **Given** the full set, **When** the check runs, **Then** originals correct, edited correct,
-   and the edited-higher, same and lower pair counts match 0.856, 0.839, 985, 100 and 13, and
-   the per-image agreement with the recorded counts is reported.
-2. **Given** 5 pairs, **When** the smoke check runs, **Then** it finishes and its counts match
-   the recorded counts for those images.
+1. **Given** 5 pairs, **When** the smoke check runs, **Then** it finishes and its count for each
+   image equals the recorded count for that image.
+2. The full 1,098-pair reproduction (0.856, 0.839, 985, 100 and 13) is not part of this feature.
+   It runs in feature 007's notebooks on the M3. The check script accepts the full set for that
+   use.
 
 ---
 
@@ -131,14 +131,39 @@ checks that the selector's choice runs and names the pipeline in the answer.
 ### Measurable Outcomes
 
 - **SC-001**: All tests pass on the laptop with `.venv/bin/python -m pytest`.
-- **SC-002**: On the M3, the SDK counts reproduce originals correct 0.856 and edited correct
-  0.839 within 0.005, and the edited-higher, same and lower counts within 5 pairs of 985, 100
-  and 13.
-- **SC-003**: The per-image agreement with the recorded counts is at least 0.99.
+- **SC-002**: On the M3, the SDK count of every image in the 5-pair smoke check equals the
+  recorded count in `07-full-counts.parquet` (arm `sam3`, merge `nms+nested`).
+- **SC-003**: The full 1,098-pair reproduction is deferred to feature 007 (decision of
+  2026-10-09: build features do not run full sets).
 
-## Reproduction on the M3
+## Verification on the M3 (smoke check, 2026-10-09)
 
-To be filled after the run.
+The first 5 pairs of `train-animals.parquet` (10 images) ran through `Harness.answer` with the
+grounding-DINO and SAM 3 tool plugins, the quantity plugin and a classifier that always chooses
+`quantity`. Run with the M3 experiment environment (torch 2.13.0, transformers 5.16.1) from a
+copy of this branch. About 3.4 s per image, model loading included.
+
+| Sample | Species | Pixels | Image | True count | Recorded count | SDK count |
+|---|---|---|---|---|---|---|
+| 0 | Raccoon | 384 | original | 4 | 4 | 4 |
+| 1 | Raccoon | 384 | edited | 5 | 5 | 5 |
+| 2 | Raccoon | 768 | original | 4 | 4 | 4 |
+| 3 | Raccoon | 768 | edited | 5 | 6 | 6 |
+| 4 | Raccoon | 1152 | original | 4 | 4 | 4 |
+| 5 | Raccoon | 1152 | edited | 5 | 6 | 6 |
+| 6 | Raccoon | 384 | original | 4 | 5 | 5 |
+| 7 | Raccoon | 384 | edited | 5 | 5 | 5 |
+| 8 | Raccoon | 768 | original | 4 | 4 | 4 |
+| 9 | Raccoon | 768 | edited | 5 | 5 | 5 |
+
+**Result: 10 of 10 images give the recorded count.** The SDK also repeats the recorded errors
+(samples 3, 5 and 6), which shows that it runs the same rules and not only reaches the same
+accuracy. On these 5 pairs: originals correct 0.8, edited correct 0.6, edited higher in 4 pairs,
+same in 1, lower in 0, as recorded.
+
+**Not verified here.** The full 1,098-pair result (0.856, 0.839, 985 higher, 100 same, 13 lower)
+runs in feature 007's notebooks on the M3. A full run was started and stopped after 55 images by
+the decision above; its partial output was not used.
 
 ## Assumptions
 
