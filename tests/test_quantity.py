@@ -1,4 +1,7 @@
-"""The quantity intent and its legs pipeline, with fake localizers in place of the models."""
+"""The quantity intent and its legs pipeline, with fake localizers in place of the models.
+
+The quantity plugin registers all thirteen counting pipelines, so the harness also loads the
+counting tools; the selector chooses `legs` for a question about legs."""
 
 import numpy as np
 import pytest
@@ -43,6 +46,7 @@ def leg_harness():
     harness.register_tool(fake_segment_concept, name="segment_concept")
     harness.register_tool(keep_smaller_regions, name="keep_smaller_regions")
     harness.register_tool(remove_duplicate_regions, name="remove_duplicate_regions")
+    harness.load_tools("intent_harness_tools.counting_plugin")
     harness.load_intents("intent_harness_quantity.plugin")
     harness.register_classifier(FixedClassifier("quantity"))
     return harness
@@ -68,9 +72,10 @@ def test_harness_counts_legs_with_trace_in_order():
     assert answer.pipeline == "legs"
     assert answer.value == 4
     assert [step.tool for step in answer.trace] == [
-        "best_box", "segment_concept", "keep_smaller_regions", "remove_duplicate_regions"]
-    assert answer.trace[0].inputs["query"] == "animal"
-    assert answer.trace[1].inputs["concept"] == "leg"
+        "select_counter", "best_box", "segment_concept", "keep_smaller_regions", "remove_duplicate_regions"]
+    assert answer.trace[0].output == "legs"
+    assert answer.trace[1].inputs["query"] == "animal"
+    assert answer.trace[2].inputs["concept"] == "leg"
 
 
 def test_added_leg_gives_one_more():
@@ -154,5 +159,7 @@ def test_tool_plugins_register_names():
     harness.load_tools("intent_harness_tools.grounding_dino_plugin", "intent_harness_tools.sam3_plugin")
     assert sorted(harness.registry.tools) == [
         "best_box", "keep_smaller_regions", "remove_duplicate_regions", "segment_concept"]
+    harness.load_tools("intent_harness_tools.counting_plugin")
     harness.load_intents("intent_harness_quantity.plugin")
     assert list(harness.registry.intents) == ["quantity"]
+    assert "select_counter" in harness.registry.tools
