@@ -16,6 +16,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+models = [
+    "torch==2.13.0",
+    "transformers==5.16.1",
+    "accelerate==1.14.0",
+]
 test = ["pytest==9.1.1"]
 
 [tool.setuptools.packages.find]
