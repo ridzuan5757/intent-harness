@@ -21,6 +21,12 @@ models = [
     "transformers==5.16.1",
     "accelerate==1.14.0",
 ]
+notebooks = [
+    "pandas==3.0.5",
+    "pyarrow==25.0.1",
+    "nbconvert==7.17.1",
+    "ipykernel==7.3.0",
+]
 test = ["pytest==9.1.1"]
 
 [tool.setuptools.packages.find]

@@ -1,0 +1,42 @@
+[
+  {
+    "key": "orientation",
+    "definition": "Questions about the direction something is facing or moving, such as the direction the dog or duck is facing, or the orientation of the school bus."
+  },
+  {
+    "key": "presence",
+    "definition": "Questions that focus on the existence or non-existence of certain elements or features in the image."
+  },
+  {
+    "key": "state",
+    "definition": "Questions that pertain to the state or condition of an object, such as whether a flag is blowing in the wind or if the ground is wet."
+  },
+  {
+    "key": "quantity",
+    "definition": "Questions about the number of objects or features present in the image."
+  },
+  {
+    "key": "positional",
+    "definition": "This aspect refers to the model's ability to understand the position and relationship of objects or elements within an image in relation to each other and their surroundings."
+  },
+  {
+    "key": "color",
+    "definition": "Questions regarding the color of certain objects or elements."
+  },
+  {
+    "key": "structural",
+    "definition": "This category involves the model's ability to identify and analyze the physical attributes and structural features of objects in an image."
+  },
+  {
+    "key": "text",
+    "definition": "Questions related to text or symbols present in the image."
+  },
+  {
+    "key": "viewpoint",
+    "definition": "Questions concerning the perspective from which the photo was taken."
+  },
+  {
+    "key": "other",
+    "definition": "Questions that fit none of the nine visual patterns: identifying or naming what is in the image, or recalling knowledge about it, with no visual property named."
+  }
+]
