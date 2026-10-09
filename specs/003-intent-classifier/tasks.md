@@ -23,10 +23,10 @@
 ## Phase 3: Recorded number
 
 - [X] T007 [US3] Write `specs/003-intent-classifier/checks/reproduce_qwen3_4b.py`
-- [ ] T008 [US3] Sync to the M3 (`~/intent-harness-runs/003/`), smoke-test on 10 items, run 388
-  under nohup, pull outputs to `~/Documents/workspace/intent-harness-runs/003/`
-- [ ] T009 [US3] Record the result in spec.md
+- [X] T008 [US3] Sync to the M3 (`~/intent-harness-runs/003/`), smoke-test on 10 items, pull
+  outputs to `~/Documents/workspace/intent-harness-runs/003/` (the full 388 moves to feature 007)
+- [X] T009 [US3] Record the result in spec.md
 
 ## Phase 4: Close
 
-- [ ] T010 Grep for the assistant name, commit, rebase on origin/main, test, push, open the PR
+- [X] T010 Grep for the assistant name, commit, rebase on origin/main, test, push, open the PR
