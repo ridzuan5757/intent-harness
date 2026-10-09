@@ -29,3 +29,6 @@ include = ["intent_harness*"]
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+intent_harness_quantity = ["*.npz"]
