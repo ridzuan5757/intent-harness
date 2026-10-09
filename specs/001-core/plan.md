@@ -72,7 +72,7 @@ intent_harness/
 ├── __init__.py      # public names
 ├── contracts.py     # Tool, Intent, IntentClassifier
 ├── types.py         # Choice, Step, Result, Answer, IntentInfo
-├── tools.py         # FunctionTool, as_tool, the trace context
+├── tool_wrapper.py  # FunctionTool, as_tool, the trace context
 ├── registry.py      # Registry, RegistrationError
 ├── loading.py       # load_module, parse_list, read_env, LoadError
 └── harness.py       # Harness
