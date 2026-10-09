@@ -1,0 +1,7 @@
+# Runtime
+numpy==2.5.3
+scipy==1.18.1
+pillow==12.3.0
+python-dotenv==1.2.4
+# Development
+pytest==9.1.1
