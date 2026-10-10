@@ -26,6 +26,7 @@ notebooks = [
     "pyarrow==25.0.1",
     "nbconvert==7.17.1",
     "ipykernel==7.3.0",
+    "jupyterlab==4.6.4",
 ]
 test = ["pytest==9.1.1"]
 
