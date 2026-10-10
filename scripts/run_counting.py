@@ -1,4 +1,4 @@
-"""Notebook 04's run: the quantity intent on the 795 VLMBias counting items (192 development,
+"""Notebook 09's run: the quantity intent on the 795 VLMBias counting items (192 development,
 603 evaluation) of the twelve sub-topics.
 
 The harness is .env.paper's, with a fixed classifier that chooses `quantity`. The question is the

@@ -110,13 +110,16 @@ class LanguageModel:
 
         with self.torch.no_grad():
             logits = self.model(input_ids=input_ids, attention_mask=attention_mask).logits
-        log_probs = self.torch.log_softmax(logits.float(), dim=-1)           # (n_options, L, vocab)
+        # Only the positions that predict the option tokens: the last prompt position and the
+        # option positions. The full sequence in float32 does not fit next to a 7B model on 32 GB.
+        start = prompt_len - 1
+        log_probs = self.torch.log_softmax(logits[:, start:, :].float(), dim=-1)   # (n_options, longest + 1, vocab)
 
         result = {}
         for row_index, option in enumerate(options):
             total = 0.0
             for step, token_id in enumerate(option_ids[option]):
-                position = prompt_len + step - 1          # the logits that predict this token
+                position = step                           # the logits that predict this token, from `start`
                 total += float(log_probs[row_index, position, token_id])
             result[option] = total
         return result

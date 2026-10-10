@@ -51,6 +51,25 @@ harness = Harness.from_env(".env")
 Tools load first, then intents, then the classifier. An intent names the tools it needs; if
 one is not loaded, loading the intent fails.
 
+## Demo notebooks
+
+`notebooks/01-demo-*.ipynb` to `05-demo-*.ipynb` show the harness at work on a few images each,
+before the result notebooks:
+
+| Notebook | What it shows |
+|---|---|
+| 01 mount the harness | loading tools, intents and the classifier; one counting and one illusion question from input to answer, with the trace |
+| 02 intent classifier | the prompt the model reads; the choice, probabilities and confidence with two and with ten intents |
+| 03 structural | one original and one edited image of each illusion; the trace of one image; the Ponzo miss |
+| 04 quantity legs | three animal pairs with the animal box and the leg regions drawn |
+| 05 quantity sub-topics | one image of each of the twelve counting sub-topics; the trace of one image |
+
+They load the harness from `.env.demo`: the parts of `.env.paper`, with the classifier model
+`Qwen/Qwen2.5-7B-Instruct` (the best model of the sweep that fits on a 32 GB laptop next to
+SAM 3). They need `INTENT_HARNESS_DATA_DIR` (see below) and the three models in the local
+HuggingFace cache: `Qwen/Qwen2.5-7B-Instruct`, `facebook/sam3` and
+`IDEA-Research/grounding-dino-tiny`.
+
 ## Reproduce the paper
 
 `.env.paper` lists what the paper loads: the measurement, counting, GroundingDINO and SAM 3
@@ -85,7 +104,8 @@ tools; the quantity and structural intents; and the option-scoring classifier wi
 
    Run them from the repository root with `PYTHONPATH=.`.
 
-4. Open the notebooks in `notebooks/`. Each reads its result files only.
+4. Open the result notebooks, `notebooks/06-results-*.ipynb` to `10-results-*.ipynb`. Each reads its
+   result files only.
 
 The item lists (prompts, image paths and gold answers) are in `data/`. The images are not in
 this repository.

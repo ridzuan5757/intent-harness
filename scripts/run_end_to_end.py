@@ -1,4 +1,4 @@
-"""Notebook 05's run: the full harness of .env.paper on every VLMBias benchmark prompt.
+"""Notebook 10's run: the full harness of .env.paper on every VLMBias benchmark prompt.
 
 The set is `benchmark-main.parquet` of VLMBias: 2,784 prompts on 1,392 images, two prompts per
 image, in seven topics. The harness is loaded with `Harness.from_env(".env.paper")`: the qwen3-4b

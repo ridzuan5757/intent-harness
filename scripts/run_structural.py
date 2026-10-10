@@ -1,4 +1,4 @@
-"""Notebook 02's run: the structural intent on the 396 VLMBias illusion images.
+"""Notebook 07's run: the structural intent on the 396 VLMBias illusion images.
 
 The harness is .env.paper's, with a fixed classifier that chooses `structural`, so the table
 measures the illusion naming and the measurement pipelines only. The question is the item's

@@ -153,7 +153,7 @@ ENV_PAPER = ROOT / ".env.paper"
 
 class FixedClassifier:
     """Chooses one intent for every question. The set runs use it, so that a table measures the
-    intent's pipelines only; notebook 05 uses the real classifier."""
+    intent's pipelines only; notebook 10 uses the real classifier."""
 
     def __init__(self, key: str) -> None:
         self.key = key

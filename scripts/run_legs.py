@@ -1,4 +1,4 @@
-"""Notebook 03's run: the quantity intent counts legs on the 2,196 animal images (1,098 pairs).
+"""Notebook 08's run: the quantity intent counts legs on the 2,196 animal images (1,098 pairs).
 
 The images are the linear-probing split of VLMBias (`train-animals.parquet`, as in the
 experiment). The harness is .env.paper's, with a fixed classifier that chooses `quantity`; the

@@ -18,6 +18,7 @@ dependencies = [
 [project.optional-dependencies]
 models = [
     "torch==2.13.0",
+    "torchvision==0.28.0",
     "transformers==5.16.1",
     "accelerate==1.14.0",
 ]
@@ -27,6 +28,7 @@ notebooks = [
     "nbconvert==7.17.1",
     "ipykernel==7.3.0",
     "jupyterlab==4.6.4",
+    "matplotlib==3.11.2",
 ]
 test = ["pytest==9.1.1"]
 

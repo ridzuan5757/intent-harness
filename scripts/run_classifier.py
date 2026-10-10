@@ -1,4 +1,4 @@
-"""Notebook 01's run: the option-scoring intent classifier on the 388 prompts, for each model.
+"""Notebook 06's run: the option-scoring intent classifier on the 388 prompts, for each model.
 
 The classifier is loaded through the SDK (`intent_harness_classifiers.option_scoring`) with ten
 description-only intents: the ten recorded intent definitions in data/intent-definitions.json,
