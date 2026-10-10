@@ -7,5 +7,10 @@ python-dotenv==1.2.4
 torch==2.13.0
 transformers==5.16.1
 accelerate==1.14.0
+# Notebooks (optional extra "notebooks": read result files, execute notebooks)
+pandas==3.0.5
+pyarrow==25.0.1
+nbconvert==7.17.1
+ipykernel==7.3.0
 # Development
 pytest==9.1.1

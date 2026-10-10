@@ -55,12 +55,13 @@ class OptionScoringClassifier:
 
 
 def register(harness: Any, model: str | None = None, language_model: ScoresOptions | None = None,
-             device: str = "mps", dtype: str = "bfloat16",
+             device: str = "mps", dtype: str = "bfloat16", kind: str = "auto",
              instructions: str = DEFAULT_INSTRUCTIONS) -> OptionScoringClassifier:
     """Set the option-scoring classifier on `harness`.
 
-    Give `model` (a HuggingFace id or a local path in the local cache) to load a causal
-    language model, or `language_model` (any object with `option_log_probabilities`).
+    Give `model` (a HuggingFace id or a local path in the local cache) to load a language
+    model, or `language_model` (any object with `option_log_probabilities`). `kind` is "lm"
+    (text-only), "vlm" (a vision-language model used on text only) or "auto" (from the config).
     """
     if language_model is None:
         if not model:
@@ -70,7 +71,7 @@ def register(harness: Any, model: str | None = None, language_model: ScoresOptio
             )
         from intent_harness_classifiers.language_model import LanguageModel
 
-        language_model = LanguageModel(model, device=device, dtype=dtype)
+        language_model = LanguageModel(model, device=device, dtype=dtype, kind=kind)
     classifier = OptionScoringClassifier(language_model, instructions=instructions)
     harness.register_classifier(classifier)
     return classifier

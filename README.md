@@ -50,3 +50,42 @@ harness = Harness.from_env(".env")
 
 Tools load first, then intents, then the classifier. An intent names the tools it needs; if
 one is not loaded, loading the intent fails.
+
+## Reproduce the paper
+
+`.env.paper` lists what the paper loads: the measurement, counting, GroundingDINO and SAM 3
+tools; the quantity and structural intents; and the option-scoring classifier with
+`Qwen/Qwen3-4B`. The models load from the local HuggingFace cache only (no download).
+
+1. Install the extras:
+
+   ```bash
+   uv pip install --python .venv/bin/python -e '.[models,notebooks,test]'
+   ```
+
+2. Set the data folder. Use the environment, or a `.env` file at the repository root (git
+   ignores it):
+
+   | Variable | Value |
+   |---|---|
+   | `INTENT_HARNESS_DATA_DIR` | the VLMBias data folder: it holds `benchmark-main/`, `benchmark-original/`, `train-animals/` and their `.parquet` tables |
+   | `INTENT_HARNESS_RESULTS_DIR` | where the runs write (default: `results/`) |
+   | `INTENT_HARNESS_RECORDED_DIR` | optional: earlier result files, for an item-by-item comparison in the notebooks |
+
+3. Run the scripts. Each one continues after a stop, and writes its result file and a `.done`
+   marker only when every item is done. `--limit N` makes a separate smoke run.
+
+   | Script | Set | Result |
+   |---|---|---|
+   | `scripts/run_classifier.py --models all` | 388 intent prompts, 24 models | `results/01-classifier-<model>.parquet` |
+   | `scripts/run_structural.py` | 396 illusion images | `results/02-structural.parquet` |
+   | `scripts/run_legs.py` | 2,196 animal images (1,098 pairs) | `results/03-legs.parquet` |
+   | `scripts/run_counting.py` | 795 counting items | `results/04-counting.parquet` |
+   | `scripts/run_end_to_end.py` | 2,784 VLMBias prompts | `results/05-end-to-end.parquet` |
+
+   Run them from the repository root with `PYTHONPATH=.`.
+
+4. Open the notebooks in `notebooks/`. Each reads its result files only.
+
+The item lists (prompts, image paths and gold answers) are in `data/`. The images are not in
+this repository.
