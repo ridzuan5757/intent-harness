@@ -141,3 +141,19 @@ models' own answers.
   text equals `ground_truth`.
 - Notebooks execute on the laptop after the result files are pulled from the M3; the scripts run
   on the M3 with the M3's existing environment and the PYTHONPATH set to a copy of this branch.
+
+## Results (2026-10-10)
+
+Full runs on the M3; notebooks executed on the laptop with the pulled result files.
+
+| Notebook | Result | Same as the record |
+|---|---|---|
+| 01 intent classifier, 24 models | best 0.781 (`qwen2.5-14b`); `qwen3-4b` 0.714 | 9,311 of 9,312 choices |
+| 02 structural, 396 images | 384 correct (0.970); 12 Ponzo misses at edit 0.15 | 396 of 396 answers |
+| 03 legs, 1,098 pairs | originals 0.856, edited 0.839; edited count higher on 985 pairs | 2,196 of 2,196 counts |
+| 04 counting sub-topics, 795 items | 453 of 603 evaluation items exact; 6 of 12 pass | 795 of 795 counts |
+| 05 end to end, 2,784 prompts | 2,414 correct (0.867); routing 2,784 of 2,784 | no record (new run) |
+
+Difference: one prompt, `mmvp_vlm:39` with `llama3.2-vision-11b`. Its two best keys (`presence`,
+`structural`) are 0.016 apart in log score and changed order. The accuracy of this model changes
+from 0.740 to 0.742.
